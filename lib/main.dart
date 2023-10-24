@@ -51,7 +51,7 @@ class Main extends StatelessWidget {
                       context,
                       MaterialPageRoute(
                           builder: (BuildContext context) =>
-                              const ProfileInfo()),
+                              ProfileInfo(pessoa: listaPessoas[i])),
                     );
                   },
                 ),
