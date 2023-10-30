@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:listas/entidades/pessoa.dart';
 import 'package:listas/pages/profile.dart';
 import 'package:listas/repository/pessoarepository.dart';
 
