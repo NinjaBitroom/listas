@@ -6,26 +6,21 @@ void main() {
   runApp(const MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    return const MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: Main(),
-    );
-  }
+  State<MyApp> createState() => _MainState();
 }
 
-class Main extends StatelessWidget {
+class _MainState extends State<MyApp> {
   static final listaPessoas = PessoaRepository.listaPessoas;
-
-  const Main({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: Scaffold(
         appBar: AppBar(
           leading: const Icon(
             Icons.menu,
@@ -36,26 +31,31 @@ class Main extends StatelessWidget {
           ),
         ),
         body: ListView.builder(
-            itemBuilder: (BuildContext context, int i) {
-              return Card(
-                child: ListTile(
-                  tileColor: Colors.lightBlueAccent,
-                  leading: CircleAvatar(
-                    backgroundImage: AssetImage(listaPessoas[i].foto),
-                  ),
-                  title: Text(listaPessoas[i].nome),
-                  trailing: Text(listaPessoas[i].idade.toString()),
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (BuildContext context) =>
-                              ProfileInfo(pessoa: listaPessoas[i])),
-                    );
-                  },
+          itemBuilder: (BuildContext context, int i) {
+            return Card(
+              child: ListTile(
+                tileColor: Colors.lightBlueAccent,
+                leading: CircleAvatar(
+                  backgroundImage: AssetImage(listaPessoas[i].foto),
                 ),
-              );
-            },
-            itemCount: listaPessoas.length));
+                title: Text(listaPessoas[i].nome),
+                trailing: Text(listaPessoas[i].idade.toString()),
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (BuildContext context) => ProfileInfo(
+                        pessoa: listaPessoas[i],
+                      ),
+                    ),
+                  );
+                },
+              ),
+            );
+          },
+          itemCount: listaPessoas.length,
+        ),
+      ),
+    );
   }
 }
